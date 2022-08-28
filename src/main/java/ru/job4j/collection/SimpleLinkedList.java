@@ -14,12 +14,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private static class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 
@@ -41,11 +39,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     public E get(int index) {
         Objects.checkIndex(index, size);
         Node<E> currentNode = first;
-        for (int i = 0; i <= index; i++) {
-            if (i == index) {
-                break;
-            }
+        int i = 0;
+        while (i < index) {
             currentNode = currentNode.next;
+            i++;
         }
         return currentNode.item;
     }
@@ -62,7 +59,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < size;
+                return point != null;
             }
 
             @Override
@@ -72,7 +69,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                 }
                 Node<E> prevEl = point;
                 point = point.next;
-                index++;
                 return prevEl.item;
             }
         };
