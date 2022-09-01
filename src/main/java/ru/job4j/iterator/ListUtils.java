@@ -7,29 +7,16 @@ public class ListUtils {
 
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
+        ListIterator<T> iterator = list.listIterator(index);
+        iterator.add(value);
     }
+
+
 
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() - 1 == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
-        if (index == list.size() - 1) {
-            iterator.add(value);
-        }
+        ListIterator<T> iterator = list.listIterator(index + 1);
+        iterator.add(value);
     }
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
@@ -42,16 +29,21 @@ public class ListUtils {
     }
 
     public static <T> void replaceIf(List<T> list, Predicate<T> filter, T value) {
-        for (int i = 0; i < list.size(); i++) {
-            if (filter.test(list.get(i))) {
-                list.set(i, value);
+        ListIterator<T> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            if (filter.test(iterator.next())) {
+                iterator.remove();
+                iterator.add(value);
             }
         }
     }
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
-        for (T el : elements) {
-            list.remove(el);
+        Iterator<T> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            if (elements.contains(iterator.next())) {
+                iterator.remove();
+            }
         }
     }
 
