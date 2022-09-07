@@ -168,37 +168,37 @@ class SimpleMapTest {
     @Test
     void whenCheckGetUser() {
         SimpleMap<User, String> map = new SimpleMap<>();
-        User User1 = new User("user1", 0, new GregorianCalendar());
-        assertThat(map.put(User1, "user1")).isTrue();
-        assertThat(map.get(User1)).isEqualTo("user1");
+        User user1 = new User("user1", 0, new GregorianCalendar());
+        assertThat(map.put(user1, "user1")).isTrue();
+        assertThat(map.get(user1)).isEqualTo("user1");
     }
 
     @Test
     void whenDoubleGetUser() {
         SimpleMap<User, String> map = new SimpleMap<>();
-        User User1 = new User("user1", 0, new GregorianCalendar());
-        assertThat(map.put(User1, "user1")).isTrue();
-        assertThat(map.get(User1)).isEqualTo("user1");
-        assertThat(map.get(User1)).isEqualTo("user1");
+        User user1 = new User("user1", 0, new GregorianCalendar());
+        assertThat(map.put(user1, "user1")).isTrue();
+        assertThat(map.get(user1)).isEqualTo("user1");
+        assertThat(map.get(user1)).isEqualTo("user1");
     }
 
     @Test
     void whenRemoveUser() {
         SimpleMap<User, String> map = new SimpleMap<>();
-        User User1 = new User("user1", 0, new GregorianCalendar());
-        assertThat(map.put(User1, "user1")).isTrue();
-        assertThat(map.remove(User1)).isTrue();
+        User user1 = new User("user1", 0, new GregorianCalendar());
+        assertThat(map.put(user1, "user1")).isTrue();
+        assertThat(map.remove(user1)).isTrue();
         assertThat(map).hasSize(0);
     }
 
     @Test
     void whenDoubleRemoveUser() {
         SimpleMap<User, String> map = new SimpleMap<>();
-        User User1 = new User("user1", 0, new GregorianCalendar());
-        assertThat(map.put(User1, "user1")).isTrue();
-        assertThat(map.remove(User1)).isTrue();
+        User user = new User("user1", 0, new GregorianCalendar());
+        assertThat(map.put(user, "user1")).isTrue();
+        assertThat(map.remove(user)).isTrue();
         assertThat(map).hasSize(0);
-        assertThat(map.remove(User1)).isFalse();
+        assertThat(map.remove(user)).isFalse();
     }
 
 }
