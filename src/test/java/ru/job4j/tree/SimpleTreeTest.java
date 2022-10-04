@@ -1,6 +1,9 @@
 package ru.job4j.tree;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.collection.tree.SimpleTree;
+import ru.job4j.collection.tree.Tree;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleTreeTest {
