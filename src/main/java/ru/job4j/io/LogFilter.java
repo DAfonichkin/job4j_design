@@ -2,18 +2,22 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LogFilter {
     public static List<String> filter(String file) {
+        List<String> result = null;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            return in.lines()
-                    .filter(l -> l.split("\\s")[l.split("\\s").length - 2].equals("404"))
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
+            result = in.lines()
+                    .filter(
+                            (l) -> {
+                                String[] stringArray = l.split("\\s");
+                                return "400".equals(stringArray[stringArray.length - 2]);
+                            })
+                    .toList();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     public static void save(List<String> log, String file) {
