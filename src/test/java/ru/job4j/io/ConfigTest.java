@@ -46,7 +46,7 @@ class ConfigTest {
     }
 
     @Test
-    void WhenEmptyLines() {
+    void whenEmptyLines() {
         String path = "./data/emptyLinesTest.properties";
         Config config = new Config(path);
         config.load();
