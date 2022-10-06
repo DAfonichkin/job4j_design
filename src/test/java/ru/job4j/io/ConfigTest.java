@@ -58,7 +58,7 @@ class ConfigTest {
         String path = "./data/correctFileTest.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("url")).isEqualTo("jdbc:postgresql://127.0.0.1:5432/trackstudio=");
+        assertThat(config.value("url")).isEqualTo("jdbc:postgresql:/127.0.0.1:5432/trackstudio=");
         assertThat(config.value("driver_class")).isEqualTo("org.postgresql.Driver=1");
         assertThat(config.value("username")).isEqualTo("postgres");
     }
