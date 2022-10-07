@@ -16,7 +16,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Pair not found");
+                .hasMessage("Pair not found in line 2");
     }
 
     @Test
@@ -25,7 +25,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Key not found");
+                .hasMessage("Key not found in line 2");
     }
 
     @Test
@@ -34,7 +34,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Value not found");
+                .hasMessage("Value not found in line 2");
    }
 
     @Test
