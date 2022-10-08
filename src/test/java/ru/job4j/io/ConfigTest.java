@@ -16,7 +16,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Pair not found in line 2");
+                .hasMessage("Pair not found in line hibernate.dialectorg.hibernate.dialect.PostgreSQLDialect");
     }
 
     @Test
@@ -25,7 +25,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Key not found in line 2");
+                .hasMessage("Key not found in line =hibernate.dialectorg.hibernate.dialect.PostgreSQLDialect");
     }
 
     @Test
@@ -34,7 +34,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Value not found in line 2");
+                .hasMessage("Value not found in line hibernate.dialectorg.hibernate.dialect.PostgreSQLDialect=");
    }
 
     @Test
