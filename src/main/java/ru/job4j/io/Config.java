@@ -20,15 +20,13 @@ public class Config {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String line;
-            int lineNumber = 0;
             while ((line = read.readLine()) != null) {
                 line = line.trim();
-                lineNumber++;
                 if (line.isBlank() || line.startsWith("#")) {
                     continue;
                 }
                 int separatorIndex = line.indexOf("=");
-                validateLine(line, separatorIndex, lineNumber);
+                validateLine(line, separatorIndex);
                 values.put(line.substring(0, separatorIndex), line.substring(separatorIndex + 1));
             }
         } catch (IOException e) {
@@ -40,15 +38,15 @@ public class Config {
         return values.get(key);
     }
 
-    private void validateLine(String line, int index, int lineNumber) {
+    private void validateLine(String line, int index) {
         if (index == -1) {
-            throw new IllegalArgumentException(String.format("Pair not found in line %d", lineNumber));
+            throw new IllegalArgumentException(String.format("Pair not found in line %s", line));
         }
         if (index == 0) {
-            throw new IllegalArgumentException(String.format("Key not found in line %d", lineNumber));
+            throw new IllegalArgumentException(String.format("Key not found in line %s", line));
         }
         if (index == line.length() - 1) {
-            throw new IllegalArgumentException(String.format("Value not found in line %d", lineNumber));
+            throw new IllegalArgumentException(String.format("Value not found in line %s", line));
         }
     }
 
