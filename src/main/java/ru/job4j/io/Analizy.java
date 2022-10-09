@@ -5,12 +5,12 @@ import java.util.StringJoiner;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        try (BufferedReader log = new BufferedReader(new FileReader(source))) {
+        try (BufferedReader log = new BufferedReader(new FileReader(source));
+             PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
             String line;
             String status;
             String previousStatus = "";
             StringJoiner resultLine = new StringJoiner(";");
-            PrintWriter out = new PrintWriter(new FileOutputStream(target));
             while ((line = log.readLine()) != null) {
                 status = line.substring(0, 3);
                 if (statusIsUnavailable(status) && !statusIsUnavailable(previousStatus)) {
