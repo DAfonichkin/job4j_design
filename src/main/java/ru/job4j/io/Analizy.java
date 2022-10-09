@@ -10,21 +10,18 @@ public class Analizy {
             String status;
             String previousStatus = "";
             StringJoiner resultLine = new StringJoiner(";");
-            try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-                while ((line = log.readLine()) != null) {
-                    status = line.substring(0, 3);
-                    if (statusIsUnavailable(status) && !statusIsUnavailable(previousStatus)) {
-                        resultLine.add(line.substring(4));
-                    }
-                    if (!statusIsUnavailable(status) && statusIsUnavailable(previousStatus)) {
-                        resultLine.add(line.substring(4));
-                        out.println(resultLine);
-                        resultLine = new StringJoiner(";");
-                    }
-                    previousStatus = status;
+            PrintWriter out = new PrintWriter(new FileOutputStream(target));
+            while ((line = log.readLine()) != null) {
+                status = line.substring(0, 3);
+                if (statusIsUnavailable(status) && !statusIsUnavailable(previousStatus)) {
+                    resultLine.add(line.substring(4));
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+                if (!statusIsUnavailable(status) && statusIsUnavailable(previousStatus)) {
+                    resultLine.add(line.substring(4));
+                    out.println(resultLine);
+                    resultLine = new StringJoiner(";");
+                }
+                previousStatus = status;
             }
         } catch (IOException e) {
             e.printStackTrace();
