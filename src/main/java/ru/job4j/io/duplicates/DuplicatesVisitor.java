@@ -14,10 +14,10 @@ import java.util.Set;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private Set<Path> duplicateFiles = new HashSet<>();
+    private Map<FileProperty, Path> pathMap = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        Map<FileProperty, Path> pathMap = new HashMap<>();
         Path duplicateFile = pathMap.put(new FileProperty(Files.size(file), file.getFileName().toString()), file);
         if (!(duplicateFile == null)) {
             duplicateFiles.add(file);
