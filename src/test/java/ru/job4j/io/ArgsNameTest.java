@@ -49,7 +49,7 @@ class ArgsNameTest {
 
     @Test
     void whenParameterWithoutValue() {
-        assertThatThrownBy(() -> ArgsName.of(new String[]{"-key"}))
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-key="}))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
