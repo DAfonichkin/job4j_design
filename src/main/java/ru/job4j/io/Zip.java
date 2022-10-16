@@ -34,15 +34,30 @@ public class Zip {
         }
     }
 
+    private void validate(ArgsName argsName) {
+        Path dir = Paths.get(argsName.get("d"));
+        if ((!Files.isDirectory(dir))) {
+            throw new IllegalArgumentException(String.format("%s is not a directory", argsName.get("d")));
+        }
+        String extensions = argsName.get("e");
+        if (extensions.indexOf(".") != 0) {
+            throw new IllegalArgumentException(String.format("Wrong format of extension - %s", argsName.get("e")));
+        }
+        String target = argsName.get("o");
+        if (!target.endsWith(".zip")) {
+            throw new IllegalArgumentException("Output file should have .zip extension");
+        }
+    }
+
     public static void main(String[] args) {
+        if (args.length < 3) {
+            throw new IllegalArgumentException("Wrong amounts of parameters");
+        }
         ArgsName zipParams = ArgsName.of(args);
         Zip zip = new Zip();
-        Path dir = Paths.get(zipParams.get("d"));
-        if ((!Files.isDirectory(dir))) {
-            throw new IllegalArgumentException(String.format("%s is not a directory", zipParams.get("d")));
-        }
+        zip.validate(zipParams);
         zip.packFiles(
-                Search.search(dir, p -> !p.toFile().getName().endsWith(zipParams.get("e"))),
+                Search.search(Paths.get(zipParams.get("d")), p -> !p.toFile().getName().endsWith(zipParams.get("e"))),
                 Paths.get(zipParams.get("o")));
     }
 }
