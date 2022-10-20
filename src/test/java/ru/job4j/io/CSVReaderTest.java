@@ -53,10 +53,10 @@ class CSVReaderTest {
         Files.writeString(file.toPath(), data);
         String expected = String.join(
                 System.lineSeparator(),
-                "age;last_name;education",
-                "20;Smith;Bachelor",
-                "25;Johnson;Undergraduate",
-                "30;Brown;Secondary special"
+                "education;age;last_name",
+                "Bachelor;20;Smith",
+                "Undergraduate;25;Johnson",
+                "Secondary special;30;Brown"
         ).concat(System.lineSeparator());
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);

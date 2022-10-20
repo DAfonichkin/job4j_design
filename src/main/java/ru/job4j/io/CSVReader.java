@@ -4,10 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class CSVReader {
 
@@ -18,24 +15,24 @@ public class CSVReader {
         try (Scanner lineScanner = new Scanner(new File(argsName.get("path")));
              PrintWriter out = new PrintWriter(new FileOutputStream((argsName.get("out"))))) {
             String del = argsName.get("delimiter");
+            boolean itsFirstLine = true;
             while (lineScanner.hasNextLine()) {
                 String line = lineScanner.nextLine();
-                Scanner rowScanner = new Scanner(line);
-                rowScanner.useDelimiter(del);
-                int index = 0;
-                String value;
                 StringJoiner resultLine = new StringJoiner(del);
-                while (rowScanner.hasNext()) {
-                    value = rowScanner.next();
-                    if (filteredColumnsIndexes.contains(index)) {
-                        resultLine.add(value);
+                List<String> values = List.of(line.split(del));
+                if (itsFirstLine) {
+                    for (String filter : filterList) {
+                        for (String value : values) {
+                            if (Objects.equals(filter, value)) {
+                                filteredColumnsIndexes.add(values.indexOf(value));
+                            }
+                        }
                     }
-                    if (filterList.contains(value)) {
-                        resultLine.add(value);
-                        filteredColumnsIndexes.add(index);
-                    }
-                    index++;
                 }
+                for (int index : filteredColumnsIndexes) {
+                    resultLine.add(values.get(index));
+                }
+                itsFirstLine = false;
                 if ("stdout".equals(argsName.get("out"))) {
                     System.out.println(resultLine);
                 } else {
@@ -46,7 +43,6 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
-
 
     private static void validate(ArgsName argsName) {
         Path dir = Paths.get(argsName.get("path"));
@@ -72,4 +68,12 @@ public class CSVReader {
         }
     }
 
+    public static void main(String[] args) {
+        ArgsName params = ArgsName.of(args);
+        try {
+            handle(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
