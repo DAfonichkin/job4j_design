@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car price="100000" model="Tesla" isElectricCar="true" >
+    <engine power="700" volume = "0"/>
+    <details>
+        <detail>Made in USA</detail>
+        <detail>Very powerful engine</detail>
+    </details>
+</car>
