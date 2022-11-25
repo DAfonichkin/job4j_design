@@ -6,7 +6,7 @@ create table cars (
 create table car_numbers (
 	id serial primary key, 
 	car_number varchar(50) unique,	
-	car_id int references cars(id)
+	car_id int references cars(id) unique
 );
 
 
