@@ -12,14 +12,14 @@ create table roles(
 
 create table rules_of_roles(
 	id serial primary key,
-    role_id references roles (id),
-    rule_id references rules (id),
+    role_id int references roles (id),
+    rule_id int references rules (id)
 );
 
 create table users(
 	id serial primary key,
     name varchar(250),
-	role_id references roles(id)
+	role_id int references roles(id)
 );
 
 create table categories(
@@ -36,19 +36,19 @@ create table item(
 	id serial primary key,
     creating_date date,
 	description text,	
-	user_id references users(id),
-	state_id references states(id),
-	category_id references categories(id),
+	user_id int references users(id),
+	state_id int references states(id),
+	category_id int references categories(id)
 );
 
 create table commentaries(
 	id serial primary key,
     name varchar(250),
-	item_id references item(id)
+	item_id int references item(id)
 );
 
 create table attachs(
 	id serial primary key,
     name varchar(250),
-	item_id references item(id)
+	item_id int references item(id)
 );
