@@ -13,14 +13,24 @@ create table history_of_price (
     date timestamp
 );
 
-create or replace function calc_tax()
+create or replace function calc_tax_row()
+    returns trigger as
+$$
+    BEGIN
+		new.price = new.price + new.price * 0.2;
+        return NEW;
+    END;
+$$
+LANGUAGE 'plpgsql';
+
+create or replace function calc_tax_statement()
     returns trigger as
 $$
     BEGIN
         update products
         set price = price + price * 0.2
-        where id = new.id;
-        return NEW;
+        where id = (select id from inserted);
+        return new;
     END;
 $$
 LANGUAGE 'plpgsql';
@@ -37,16 +47,16 @@ $$
 LANGUAGE 'plpgsql';
 
 create trigger tax_after_trigger
-after insert
-on products
+after insert on products
+referencing new table as inserted
 for each statement
-execute procedure calc_tax();
+execute procedure calc_tax_statement();
 
 create trigger tax_before_trigger
 before insert
 on products
 for each row
-execute procedure calc_tax();
+execute procedure calc_tax_row();
 
 create trigger history_after_trigger
 after insert
