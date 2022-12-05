@@ -1,0 +1,5 @@
+psql --username=postgres
+\connect item_tracker;
+BEGIN transaction isolation level serializable;
+update Employees set name = 'Anna' where id = 3;
+commit;
