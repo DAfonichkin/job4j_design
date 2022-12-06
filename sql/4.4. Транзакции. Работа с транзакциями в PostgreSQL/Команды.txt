@@ -1,0 +1,10 @@
+\connect item_tracker;
+
+ BEGIN transaction;
+ update Employees set name = 'Anna' where id = 3;
+ savepoint point1;
+ update Employees set name = 'Ivan' where id = 3;
+ select * from Employees where id = 3;
+ rollback to point1;
+ commit;
+ select * from Employees where id = 3;
