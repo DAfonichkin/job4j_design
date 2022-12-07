@@ -1,6 +1,6 @@
 Begin transaction;
 DECLARE
-    cursor_products cursor for
+    cursor_products SCROLL CURSOR FOR
                         select * from products;
 FETCH LAST FROM cursor_products;						
 FETCH BACKWARD ALL cursor_products;
