@@ -24,59 +24,55 @@ public class TableEditor implements AutoCloseable {
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    public void createTable(String tableName) throws Exception {
+    private void createStatement(String sql) throws Exception {
         try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "create table if not exists %s()",
-                    tableName
-            );
             statement.execute(sql);
-         }
+        }
+    }
+
+    public void createTable(String tableName) throws Exception {
+        String sql = String.format(
+                "create table if not exists %s()",
+                tableName
+        );
+        createStatement(sql);
     }
 
     public void dropTable(String tableName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Drop table %s;",
-                    tableName
-            );
-            statement.execute(sql);
-        }
+        String sql = String.format(
+                "Drop table %s;",
+                tableName
+        );
+        createStatement(sql);
     }
 
-    public void addColumn(String tableName, String columnName, String type) throws Exception  {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s add %s %s;",
-                    tableName,
-                    columnName,
-                    type
-            );
-            statement.execute(sql);
-        }
+    public void addColumn(String tableName, String columnName, String type) throws Exception {
+        String sql = String.format(
+                "Alter table %s add %s %s;",
+                tableName,
+                columnName,
+                type
+        );
+        createStatement(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s drop column %s;",
-                    tableName,
-                    columnName
-            );
-            statement.execute(sql);
-        }
+        String sql = String.format(
+                "Alter table %s drop column %s;",
+                tableName,
+                columnName
+        );
+        createStatement(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s rename column %s to %s;",
-                    tableName,
-                    columnName,
-                    newColumnName
-            );
-            statement.execute(sql);
-        }
+        String sql = String.format(
+                "Alter table %s rename column %s to %s;",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        createStatement(sql);
     }
 
 
