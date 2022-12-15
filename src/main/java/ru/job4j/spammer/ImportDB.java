@@ -24,9 +24,9 @@ public class ImportDB {
         return users;
     }
 
-    private User convertStringToUser(String inputString) throws IllegalArgumentException {
+    private User convertStringToUser(String inputString) {
         String[] stringArray = inputString.split(";");
-        if (stringArray.length < 2 || "".equals(stringArray[0]) || "".equals(stringArray[1])) {
+        if (stringArray.length < 2 || stringArray[0].isBlank() || stringArray[1].isBlank()) {
             throw new IllegalArgumentException();
         }
         return new User(stringArray[0], stringArray[1]);
