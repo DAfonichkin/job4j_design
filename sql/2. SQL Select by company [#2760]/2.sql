@@ -1,17 +1,10 @@
-with people_in_company as 
-	(select 
-	sum(1) as people_count,
-	company_id
-	from 
-	person
-	group by company_id),  
-	top_company_id as (
-	select p.company_id, p.people_count
-	from people_in_company p 
-	join (select max(people_in_company.people_count) people_count 
-		  from people_in_company) max_people
-	on p.people_count = max_people.people_count)
-select c.name, t.people_count
-from company c
-inner join  top_company_id t
-on c.id = t.company_id;
+SELECT cmp.name, count(pr.company_id) 
+from person pr
+join company cmp
+on pr.company_id = cmp.id
+GROUP by cmp.name 
+having count(pr.company_id) = (
+	select count(pr.name) 
+	from person pr
+	GROUP by pr.company_id 
+	order by count(pr.name) desc limit 1)
