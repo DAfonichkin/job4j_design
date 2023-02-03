@@ -44,9 +44,9 @@ public class Menu {
             if (ADD_POST == userChoice) {
                 System.out.println(TEXT_OF_POST);
                 String text = scanner.nextLine();
-                userGenerator.generate();
-                commentGenerator.generate();
-                postStore.add(new Post(text, commentGenerator.getComments()));
+                createPost(commentGenerator, userGenerator, postStore, text);
+                commentGenerator.clear();
+                userGenerator.clear();
             } else if (ADD_MANY_POST == userChoice) {
                 System.out.println(TEXT_OF_POST);
                 String text = scanner.nextLine();
@@ -54,6 +54,8 @@ public class Menu {
                 String count = scanner.nextLine();
                 for (int i = 0; i < Integer.parseInt(count); i++) {
                     createPost(commentGenerator, userGenerator, postStore, text);
+                    commentGenerator.clear();
+                    userGenerator.clear();
                 }
             } else if (SHOW_ALL_POSTS == userChoice) {
                 System.out.println(postStore.getPosts());

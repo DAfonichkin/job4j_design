@@ -36,7 +36,6 @@ public class CommentGenerator implements Generate {
 
     @Override
     public void generate() {
-        comments.clear();
         StringBuilder comment = new StringBuilder();
         for (int i = 0; i < COUNT; i++) {
             comment.append(phrases.get(random.nextInt(phrases.size())));
@@ -49,5 +48,9 @@ public class CommentGenerator implements Generate {
                     userGenerator.randomUser()));
             comment.setLength(0);
         }
+    }
+
+    public void clear() {
+        comments.clear();
     }
 }
