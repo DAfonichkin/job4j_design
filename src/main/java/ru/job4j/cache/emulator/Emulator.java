@@ -1,4 +1,6 @@
-package ru.job4j.cache;
+package ru.job4j.cache.emulator;
+
+import ru.job4j.cache.DirFileCache;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,8 +9,8 @@ import java.util.Scanner;
 
 public class Emulator {
 
-    public static final Integer LOAD = 1;
-    public static final Integer GET = 2;
+    public static final int LOAD = 1;
+    public static final int GET = 2;
     public static final String MENU = """
                 Введите 1 для загрузки файла в кэш.
                 Введите 2 для получения файла из кэша.
