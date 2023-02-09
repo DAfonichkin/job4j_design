@@ -36,7 +36,7 @@ class MaxMinTest {
     void whenEmptyListMax() {
         MaxMin maxMin = new MaxMin();
         testList.clear();
-        assertThatThrownBy(()->maxMin.max(testList, comparator))
+        assertThatThrownBy(() -> maxMin.max(testList, comparator))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,7 +44,7 @@ class MaxMinTest {
     void whenEmptyListMin() {
         MaxMin maxMin = new MaxMin();
         testList.clear();
-        assertThatThrownBy(()->maxMin.min(testList, comparator))
+        assertThatThrownBy(() -> maxMin.min(testList, comparator))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
