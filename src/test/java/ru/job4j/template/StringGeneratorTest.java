@@ -16,7 +16,7 @@ class StringGeneratorTest {
         Generator stringGenerator = new StringGenerator();
         Map<String, String> keys = new HashMap<>();
         String template = "";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -26,7 +26,7 @@ class StringGeneratorTest {
         Map<String, String> keys = new HashMap<>();
         keys.put("name", "Petr");
         String template = "";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,7 +35,7 @@ class StringGeneratorTest {
         Generator stringGenerator = new StringGenerator();
         Map<String, String> keys = new HashMap<>();
         String template = "I am a ${name}, Who are ${subject}?";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -45,7 +45,7 @@ class StringGeneratorTest {
         Map<String, String> keys = new HashMap<>();
         keys.put("name", "Petr");
         String template = "Who are ${subject}?";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -56,7 +56,7 @@ class StringGeneratorTest {
         keys.put("name", "Petr");
         keys.put("subject", "Ivan");
         String template = "Who are ${subject}?";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -66,7 +66,7 @@ class StringGeneratorTest {
         Map<String, String> keys = new HashMap<>();
         keys.put("subject", "Ivan");
         String template = "I am a ${name}, Who are ${subject}?";
-        assertThatThrownBy(()->stringGenerator.produce(template, keys))
+        assertThatThrownBy(() -> stringGenerator.produce(template, keys))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
