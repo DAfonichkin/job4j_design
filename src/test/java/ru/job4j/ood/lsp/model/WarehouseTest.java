@@ -23,8 +23,7 @@ class WarehouseTest {
                 new GregorianCalendar(2023, Calendar.FEBRUARY, 28).getTime(),
                 100,
                 10);
-        Predicate<Integer> condition = p -> p < 25 && p >= 0;
-        store = new Warehouse(condition);
+        store = new Warehouse();
     }
 
     @Test
@@ -41,6 +40,7 @@ class WarehouseTest {
 
     @Test
     void whenAddFood() {
+        checkingDate = new GregorianCalendar(2023, Calendar.FEBRUARY, 1).getTime();
         store.addFood(food, checkingDate);
         assertThat(store.getFood()).isEqualTo(List.of(food));
     }

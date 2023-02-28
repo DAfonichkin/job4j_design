@@ -36,9 +36,9 @@ class ControlQualityTest {
                 100,
                 10);
         List<Food> foodList = List.of(food1, food2, food3, food4);
-        Store warehouse = new Warehouse(p -> p < 25 && p >= 0);
-        Store shop = new Shop(p -> p < 100 && p >= 25);
-        Store trash = new Trash(p -> p > 100);
+        Store warehouse = new Warehouse();
+        Store shop = new Shop();
+        Store trash = new Trash();
         List<Store> storeList = List.of(warehouse, shop, trash);
         ControlQuality controlQuality = new ControlQuality(foodList, storeList, checkingDate);
         controlQuality.allocateFood();

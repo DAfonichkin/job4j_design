@@ -24,8 +24,7 @@ class ShopTest {
                 new GregorianCalendar(2023, Calendar.FEBRUARY, 28).getTime(),
                 100,
                 10);
-        Predicate<Integer> condition = p -> p < 100 && p >= 25;
-        store = new Shop(condition);
+        store = new Shop();
     }
 
     @Test

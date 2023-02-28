@@ -23,8 +23,7 @@ class TrashTest {
                 new GregorianCalendar(2023, Calendar.FEBRUARY, 28).getTime(),
                 100,
                 10);
-        Predicate<Integer> condition = p -> p >= 100;
-        store = new Trash(condition);
+        store = new Trash();
     }
 
     @Test
@@ -41,6 +40,7 @@ class TrashTest {
 
     @Test
     void whenAddFood() {
+        checkingDate = new GregorianCalendar(2023, Calendar.MARCH, 1).getTime();
         store.addFood(food, checkingDate);
         assertThat(store.getFood()).isEqualTo(List.of(food));
     }

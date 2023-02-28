@@ -6,14 +6,20 @@ import java.util.function.Predicate;
 
 public class Shop extends AbstractStore {
 
-    public Shop(Predicate<Integer> allocateCondition) {
-        this.allocateCondition = allocateCondition;
-    }
     @Override
-    public void addFood(Food food, Date checkingDate) {
-        super.addFood(food, checkingDate);
+    public boolean foodMeetsTheCondition(Food food, Date checkingDate) {
+        int freshPercent = food.getFreshPercent(checkingDate);
+        return freshPercent < 100 && freshPercent >= 25;
+    }
+
+    @Override
+    public boolean addFood(Food food, Date checkingDate) {
+        if (!super.addFood(food, checkingDate)) {
+            return false;
+        }
         if (food.getFreshPercent(checkingDate) > 75) {
             food.setPrice(food.getPrice() - food.getPrice() * food.getDiscount() / 100);
         }
+        return true;
     }
 }
