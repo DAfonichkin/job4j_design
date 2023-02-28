@@ -1,7 +1,7 @@
-package ru.job4j.ood.lsp.service;
+package ru.job4j.ood.lsp.foodstore.service;
 
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.*;
+import ru.job4j.ood.lsp.foodstore.model.*;
 
 import java.util.Calendar;
 import java.util.Date;

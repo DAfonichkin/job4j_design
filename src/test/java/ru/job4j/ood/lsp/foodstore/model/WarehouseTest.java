@@ -1,4 +1,4 @@
-package ru.job4j.ood.lsp.model;
+package ru.job4j.ood.lsp.foodstore.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,11 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.*;
 
-class TrashTest {
+class WarehouseTest {
     private Food food;
     private Date checkingDate;
     private Store store;
@@ -23,24 +22,24 @@ class TrashTest {
                 new GregorianCalendar(2023, Calendar.FEBRUARY, 28).getTime(),
                 100,
                 10);
-        store = new Trash();
+        store = new Warehouse();
     }
 
     @Test
     void whenFoodMeetsConditionThanTrue() {
-        checkingDate = new GregorianCalendar(2023, Calendar.MARCH, 1).getTime();
+        checkingDate = new GregorianCalendar(2023, Calendar.FEBRUARY, 1).getTime();
         assertThat(store.foodMeetsTheCondition(food, checkingDate)).isEqualTo(true);
     }
 
     @Test
     void whenFoodNotMeetsConditionThanFalse() {
-        checkingDate = new GregorianCalendar(2023, Calendar.FEBRUARY, 27).getTime();
+        checkingDate = new GregorianCalendar(2023, Calendar.FEBRUARY, 28).getTime();
         assertThat(store.foodMeetsTheCondition(food, checkingDate)).isEqualTo(false);
     }
 
     @Test
     void whenAddFood() {
-        checkingDate = new GregorianCalendar(2023, Calendar.MARCH, 1).getTime();
+        checkingDate = new GregorianCalendar(2023, Calendar.FEBRUARY, 1).getTime();
         store.addFood(food, checkingDate);
         assertThat(store.getFood()).isEqualTo(List.of(food));
     }

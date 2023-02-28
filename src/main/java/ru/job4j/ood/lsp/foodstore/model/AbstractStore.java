@@ -1,10 +1,8 @@
-package ru.job4j.ood.lsp.model;
+package ru.job4j.ood.lsp.foodstore.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 
 abstract class AbstractStore implements Store {
     private final List<Food> content = new ArrayList<>();

@@ -1,4 +1,4 @@
-package ru.job4j.ood.lsp.model;
+package ru.job4j.ood.lsp.foodstore.model;
 
 import java.util.Date;
 import java.util.List;
