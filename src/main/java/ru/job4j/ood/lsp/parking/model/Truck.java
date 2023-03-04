@@ -5,6 +5,9 @@ public class Truck implements Car {
     private final String name;
 
     public Truck(String name, int size) {
+        if (size <= PassengerCar.SIZE) {
+            throw new IllegalArgumentException("Size must be more than 1");
+        }
         this.name = name;
         this.size = size;
     }

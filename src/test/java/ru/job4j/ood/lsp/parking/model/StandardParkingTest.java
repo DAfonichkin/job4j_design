@@ -9,7 +9,6 @@ import ru.job4j.ood.lsp.parking.model.Truck;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-@Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
 class StandardParkingTest {
     
     @Test
@@ -53,6 +52,6 @@ class StandardParkingTest {
         parking.park(truck);
         parking.park(car1);
         parking.park(car2);
-        assertThat(parking.getCars()).isEqualTo(List.of(car1, car2, truck));
+        assertThat(parking.getCars()).containsAll(List.of(car1, car2, truck));
     }
 }

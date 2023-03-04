@@ -5,25 +5,35 @@ import java.util.List;
 
 public class StandardParking implements Parking {
 
-    private List<Car> passCars = new ArrayList<>();
-    private List<Car> trucks = new ArrayList<>();
-    private final int truckPlacesCount;
-    private final int carPlacesCount;
+    private List<Car> cars = new ArrayList<>();
+    private int truckPlacesCount;
+    private int carPlacesCount;
 
     public StandardParking(int carPlacesCount, int truckPlacesCount) {
+        if (carPlacesCount < 0 || truckPlacesCount < 0) {
+            throw new IllegalArgumentException("Count of places must be more than 1");
+        }
         this.truckPlacesCount = truckPlacesCount;
         this.carPlacesCount = carPlacesCount;
     }
 
     @Override
     public boolean park(Car car) {
+        if (truckPlacesCount >= PassengerCar.SIZE && car.getSize() > PassengerCar.SIZE) {
+            cars.add(car);
+            truckPlacesCount--;
+            return true;
+        }
+        if (carPlacesCount >= car.getSize()) {
+            cars.add(car);
+            carPlacesCount -= car.getSize();
+            return true;
+        }
         return false;
     }
 
     @Override
     public List<Car> getCars() {
-        List<Car> result = new ArrayList<>(passCars);
-        result.addAll(trucks);
-        return result;
+        return new ArrayList<>(cars);
     }
 }
