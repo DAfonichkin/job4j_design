@@ -19,7 +19,7 @@ public class StandardParking implements Parking {
 
     @Override
     public boolean park(Car car) {
-        if (truckPlacesCount >= PassengerCar.SIZE && car.getSize() > PassengerCar.SIZE) {
+        if (truckPlacesCount >= 1 && car.getSize() > PassengerCar.SIZE) {
             cars.add(car);
             truckPlacesCount--;
             return true;
