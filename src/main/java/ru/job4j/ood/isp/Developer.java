@@ -1,4 +1,4 @@
-package ru.job4j.ood.icp;
+package ru.job4j.ood.isp;
 
 public interface Developer {
     void programmingOnC();
