@@ -13,6 +13,7 @@ public class ToDoApp {
     public static final int PRINT = 4;
     public static final String NAME = "    Введите имя элемента";
     public static final String PARENT_NAME = "    Введите имя родительского элемента";
+    public static final String MENU_IS_EMPTY = "    Не найдены элементы меню. Пожалуйста, выполните добавление элементов.";
     public static final String MENU = """
                 Введите 1, для добавления в корень меню.
                 Введите 2, для добавления к родительскому элементу.
@@ -32,6 +33,10 @@ public class ToDoApp {
                 System.out.println(NAME);
                 menu.add(Menu.ROOT, scanner.nextLine(), STUB_ACTION);
             } else if (ADD_TO_PARENT == userChoice) {
+                if (!menu.iterator().hasNext()) {
+                    System.out.println(MENU_IS_EMPTY);
+                    continue;
+                }
                 System.out.println(NAME);
                 String name = scanner.nextLine();
                 System.out.println(PARENT_NAME);
@@ -40,6 +45,10 @@ public class ToDoApp {
                     System.out.println("Не удалось добавить элемент");
                 }
             } else if (CALL_ACTION == userChoice) {
+                if (!menu.iterator().hasNext()) {
+                    System.out.println(MENU_IS_EMPTY);
+                    continue;
+                }
                 System.out.println(NAME);
                 String name = scanner.nextLine();
                 Optional<Menu.MenuItemInfo> selected = menu.select(name);
@@ -49,6 +58,10 @@ public class ToDoApp {
                 }
                 selected.get().getActionDelegate().delegate();
             } else if (PRINT == userChoice) {
+                if (!menu.iterator().hasNext()) {
+                    System.out.println(MENU_IS_EMPTY);
+                    continue;
+                }
                 MenuPrinter simplePrinter = new SimpleMenuPrinter();
                 simplePrinter.print(menu);
             } else {
