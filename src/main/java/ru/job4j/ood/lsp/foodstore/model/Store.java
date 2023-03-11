@@ -8,5 +8,7 @@ public interface Store {
 
     boolean addFood(Food food, Date checkingDate);
 
+    void clearFood();
+
     List<Food> getFood();
 }

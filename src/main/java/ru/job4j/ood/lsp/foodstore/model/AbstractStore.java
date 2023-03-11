@@ -17,6 +17,10 @@ abstract class AbstractStore implements Store {
         return true;
     }
 
+    public void clearFood() {
+        content.clear();
+    }
+
     public List<Food> getFood() {
         return new ArrayList<>(content);
     }
